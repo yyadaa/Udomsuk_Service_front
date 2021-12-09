@@ -13,6 +13,7 @@ function Home() {
         { name: "Line : @lbi4812e", icon: <BsIcon.BsLine />, },
         { name: "Tel : 02-0479421 หรือ 081-8166032 และ 087-0667767", icon: <BsIcon.BsTelephone />, },
     ]
+
     return (
         <>
             <div class="md:flex h-full flex-col bg-cream bg-opacity-50">

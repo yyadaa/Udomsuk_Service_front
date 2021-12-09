@@ -14,14 +14,18 @@ export default function Navbar() {
     ];
     // สร้างตัวแปรเก็บค่า true false (boolean) เพื่อดูว่ากดปุ่ม nav หรือยัง
     const [click, setClick] = useState(false);
-    // ข้างล่างจะเป็นฟังก์ชั่นถ้ากดปุ่ม จะ set ค่าตัวแปรด้านบนเป็นค่าตรงข้าม
+    // ข้างล่างจะเป็นฟังก์ชั่นถ้ากดปุ่มจะ set ค่าตัวแปรด้านบนเป็นค่าตรงข้าม
     const handleClick = () => setClick(!click);
 
     return (
         <>
             <div class="w-full bg-blue h-20 text-white flex flex-row space-between items-center">
                 {/* logo */}
-                <a href="../contents/Home.js"><h3 class=" flex item-center m-5 bold logo text-2xl " >Udomsuk Services</h3></a>
+                <Link to="/home">
+                    <h3 class=" flex item-center m-5 bold logo text-2xl">
+                        Udomsuk Services
+                    </h3>
+                </Link>
                 {/* itemnav */}
                 <div className="w-4/5 hidden md:flex flex-row items-center pl-4">
                     {nav_item.map((data) => {
@@ -34,13 +38,40 @@ export default function Navbar() {
                 </div>
                 {/* login/register */}
                 <div className="hidden md:flex w-4/5 justify-end items-center space-x-4 flex-row pr-3 static">
-                {nav_register.map((data) => {
-                        return <NavLink exact activeClassName="active" to={data.path} >
-                            <div className="mx-4">
-                                <span>{data.name}</span>
-                            </div>
-                        </NavLink>
-                    })}
+                    {localStorage.token ?
+                        <>
+                            <span className="p-3 bg-cream rounded text-blue">สวัสดีคุณ {localStorage.username}</span>
+                            {localStorage.level === "admin" ?
+                                <>
+                                    <Link to="/dashboard">
+                                        Dashboard
+                                    </Link>
+                                    <Link to="/profile">
+                                        Profile
+                                    </Link>
+                                </>
+                                :
+                                <Link to="/profile">
+                                    profile
+                                </Link>
+                            }
+                            <button onClick={() => {
+                                localStorage.clear();
+                                window.location.href = "/home"
+                            }} >
+                                <div className="mx-4">
+                                    <span>ออกจากระบบ</span>
+                                </div>
+                            </button>
+                        </>
+                        :
+                        nav_register.map((data) => {
+                            return <NavLink exact activeClassName="active" to={data.path} >
+                                <div className="mx-4">
+                                    <span>{data.name}</span>
+                                </div>
+                            </NavLink>
+                        })}
                 </div>
                 {/* responsive */}
                 <div className="md:hidden flex items-center w-3/5 justify-end pr-4">
@@ -61,12 +92,42 @@ export default function Navbar() {
                     </Link>
                 })}
                 <div className="border-t-2 border-white pt-2">
-                <Link to="/login" >
-                    <span className=" block py-2 px-4 text-l">ลงชื่อเข้าใช้</span>
-                </Link>
-                <Link to="/signup" >
-                    <span className=" block py-2 px-4 text-l">สมัครสมาชิก</span>
-                </Link>
+                    {localStorage.token ?
+                        <>
+                            {localStorage.level === "admin" ?
+                                <>
+                                    <Link to="/dashboard" className="block py-2 px-4 text-l">
+                                        Dashboard
+                                    </Link>
+                                    <Link to="/profile" className="block py-2 px-4 text-l">
+                                        Profile
+                                    </Link>
+                                </>
+                                :
+                                <Link to="/profile" className="block py-2 px-4 text-l">
+                                    profile
+                                </Link>
+                            }
+                            <button onClick={() => {
+                                localStorage.clear();
+                                window.location.href = "/home"
+                            }} >
+                                <div className=" block py-2 px-4 text-l ">
+                                    <span>ออกจากระบบ</span>
+                                </div>
+                            </button>
+                        </>
+                        :
+                        <>
+                            <Link to="/login" >
+                                <span className=" block py-2 px-4 text-l">ลงชื่อเข้าใช้</span>
+                            </Link>
+                            <Link to="/signup" >
+                                <span className=" block py-2 px-4 text-l">สมัครสมาชิก</span>
+                            </Link>
+                        </>
+                    }
+
                 </div>
             </div>
         </>

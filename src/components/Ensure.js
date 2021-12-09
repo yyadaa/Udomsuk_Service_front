@@ -13,7 +13,7 @@ import Image10 from '../img/ensure/mittare.jpeg'
 function Ensure() {
     return (
         <Figure>
-            <Figure.Caption className="text-4xl md:flex justify-center p-5 rounded-md bg-bluebg mt-10 mx-10 text-white item-center text-center">
+            <Figure.Caption className="text-2xl md:text-4xl md:flex justify-center p-5 rounded-md bg-bluebg mt-10 mx-10 text-white item-center text-center shadow-md">
                 ประกันในเครือ
             </Figure.Caption>
             <div className="flex w-full flex-warp flex-col justify-center items-center">

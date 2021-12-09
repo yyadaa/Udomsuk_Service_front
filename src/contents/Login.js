@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer'
 import Avatar from '@mui/material/Avatar';
@@ -16,6 +16,7 @@ import {
   BrowserRouter as Router,
   Link,
 } from "react-router-dom";
+import swal from 'sweetalert';
 
 function Copyright(props) {
   return (
@@ -32,16 +33,56 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+// handle api
+async function loginUser(credentials) {
+  return fetch('https://udomsukservice.herokuapp.com/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => data.json())
+ } 
+
 export default function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const response = await loginUser({
+      email,
+      password
     });
-  };
+    if ('token' in response) {
+      swal("Success", response.message, "success", {
+        buttons: false,
+        timer: 2000,
+      })
+      .then(() => {
+        localStorage.setItem('token', response['token']);
+        localStorage.setItem('username', response['username']);
+        localStorage.setItem('email', response['email']);
+        localStorage.setItem('level', response['level']);
+        localStorage.setItem('firstname', response['firstname']);
+        localStorage.setItem('surname', response['surname']);
+        localStorage.setItem('address', response['address']);
+        localStorage.setItem('tel', response['tel']);
+        window.location.href = "/home";
+      });
+    } else {
+      swal("Failed", response.message, "error");
+    }
+  }
+
+  function handleEmailChange(event) {
+    setEmail(event.target.value)
+  }
+
+  function handlePasswordChange(event) {
+    setPassword(event.target.value)
+  }
 
   return (
     <>
@@ -74,6 +115,7 @@ export default function Login() {
                   name="email"
                   autoComplete="email"
                   autoFocus
+                  onChange={handleEmailChange}
                 />
                 <TextField
                   margin="normal"
@@ -83,6 +125,7 @@ export default function Login() {
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={handlePasswordChange}
                   autoComplete="current-password"
                 />
                 <Button

@@ -66,11 +66,10 @@ export default function MotorSecondHand() {
 
             {productData.length > 0 ? productData.map((data) => {
                 return <>
-
                     <div className={data.status === true ?
-                        "bg-center bg-green h-2/5 rounded-lg px-4 flex justify-center items-center flex-col shadow-md flex-shrink lg:w-max w-full my-4 sm:mx-4"
+                        "bg-center bg-green h-2/5 rounded-lg px-4 flex justify-center items-center flex-col shadow-md flex-shrink lg:w-max w-full my-4 sm:mx-4 hover:px-6 duration-500"
                         :
-                        "bg-center bg-red text-white h-2/5 rounded-lg px-4 flex justify-center items-center flex-col shadow-md flex-shrink lg:w-max w-full my-4 sm:mx-4"}>
+                        "bg-center bg-red text-white h-2/5 rounded-lg px-4 flex justify-center items-center flex-col shadow-md flex-shrink lg:w-max w-full my-4 sm:mx-4 hover:px-6 duration-500"}>
 
                         <img src={data.img} alt={data.products_name} className="rounded-lg h-2/5 w-4/5"></img>
                         <span className="text-xl font-bold my-2">{data.products_name}</span>

@@ -42,16 +42,16 @@ function Status() {
             {/* ถ้ามีข้อมูลในตัวแปร report ให้เป็น h-full ถ้าไม่มี h-screen เพื่อ responsive */}
             <div className={
                 report.length > 0 ?
-                    "bg-gray flex h-full justify-center items-center w-full py-10 flex-col"
+                    "bg-cream bg-opacity-50 flex h-full justify-center items-center w-full py-10 flex-col"
                     :
-                    "bg-gray flex h-screen justify-center items-center w-full py-10 flex-col"
+                    "bg-cream bg-opacity-50 flex h-screen justify-center items-center w-full py-10 flex-col"
             }>
-                <icon className=" flex justify-center text-9xl text-green-800">
+                <icon className=" md:flex justify-center text-8xl md:text-9xl text-green">
                     <BsFillCalendarCheckFill />
                 </icon>
-                <div className=" flex justify-center text-center h-1/12 flex-row">
+                <div className=" md:flex justify-center text-center h-1/12 flex-row">
                     <form onSubmit={handleSubmit}>
-                        <lable className="text-2xl font-bold">
+                        <lable className=" text-xl md:text-2xl font-bold">
                             Track ID : &nbsp;
                             <input type="text" name="track_id" className=" border-2 rounded-md" onChange={handleChange} required />
                         </lable>
@@ -135,7 +135,7 @@ function Status() {
                 </div>
                 {report.length > 0 ?
                     <div className=" flex text-center justify-center items-center flex-col m-10">
-                        <button className=" bg-cream rounded-xl flex justify-center p-5 text-2xl item-center mb-3 border-2" onClick={exportPDF}>
+                        <button className=" bg-gray rounded-lg flex justify-center p-5 text-2xl item-center mb-3 border-2" onClick={exportPDF}>
                             Export PDF
                         </button>
                     </div>

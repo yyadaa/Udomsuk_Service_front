@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer'
 import Avatar from '@mui/material/Avatar';
@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import swal from 'sweetalert';
 import {
     // eslint-disable-next-line
     BrowserRouter as Router,
@@ -33,16 +34,64 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Signup() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
+async function register(credentials) {
+
+    return await fetch("https://udomsukservice.herokuapp.com/auth/register", {
+        method: "POST",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(credentials),
+    })
+        .then((res) => res.json())
+        .then((result) => {
+            return result
         });
-    };
+}
+
+export default function Signup() {
+    const [email, setEmail] = useState();
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+    const [fname, setFname] = useState();
+    const [lname, setLname] = useState();
+    const [address, setAddress] = useState();
+    const [tel, setTel] = useState();
+
+    const handleSubmit = async () => {
+
+        const response = await register({
+            email: email,
+            password: password,
+            username: username,
+            firstname: fname,
+            surname: lname,
+            address: address,
+            tel: tel
+        });
+        if (response.result === "success") {
+            swal("Success", response.result, "success", {
+                buttons: false,
+                timer: 2000,
+            })
+                .then(() => {
+                    window.location.href = "/login";
+                });
+        } else {
+            swal("Failed", response.result, "error");
+        }
+    }
+
+    // onChange handle
+    const handleEmailChange = (event) => setEmail(event.target.value)
+    const handlePasswordChange = (event) => setPassword(event.target.value)
+    const handleFnameChange = (event) => setFname(event.target.value)
+    const handleLnameChange = (event) => setLname(event.target.value)
+    const handleUsernameChange = (event) => setUsername(event.target.value)
+    const handleAddressChange = (event) => setAddress(event.target.value)
+    const handleTelChange = (event) => setTel(event.target.value)
 
     return (
         <>
@@ -65,7 +114,7 @@ export default function Signup() {
                             <Typography component="h1" variant="h5">
                                 Sign up
                             </Typography>
-                            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                            <Box noValidate sx={{ mt: 3 }}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={6}>
                                         <TextField
@@ -76,6 +125,8 @@ export default function Signup() {
                                             id="firstName"
                                             label="First Name"
                                             autoFocus
+                                            value={fname}
+                                            onChange={handleFnameChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -85,7 +136,9 @@ export default function Signup() {
                                             id="lastName"
                                             label="Last Name"
                                             name="lastName"
+                                            value={lname}
                                             autoComplete="family-name"
+                                            onChange={handleLnameChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -95,7 +148,45 @@ export default function Signup() {
                                             id="email"
                                             label="Email Address"
                                             name="email"
+                                            value={email}
                                             autoComplete="email"
+                                            onChange={handleEmailChange}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            required
+                                            fullWidth
+                                            id="username"
+                                            label="Username"
+                                            name="username"
+                                            value={username}
+                                            autoComplete="username"
+                                            onChange={handleUsernameChange}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            required
+                                            fullWidth
+                                            id="address"
+                                            label="Address"
+                                            name="address"
+                                            value={address}
+                                            autoComplete="address"
+                                            onChange={handleAddressChange}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            required
+                                            fullWidth
+                                            id="tel"
+                                            label="Phone Number"
+                                            name="tel"
+                                            value={tel}
+                                            autoComplete="tel"
+                                            onChange={handleTelChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -106,15 +197,17 @@ export default function Signup() {
                                             label="Password"
                                             type="password"
                                             id="password"
+                                            value={password}
                                             autoComplete="new-password"
+                                            onChange={handlePasswordChange}
                                         />
                                     </Grid>
                                 </Grid>
                                 <Button
-                                    type="submit"
                                     fullWidth
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
+                                    onClick={async () => await handleSubmit()}
                                 >
                                     Sign Up
                                 </Button>

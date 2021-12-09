@@ -1,3 +1,4 @@
+import React from 'react'
 import './css/App.css';
 import Home from './contents/Home'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
@@ -9,6 +10,7 @@ import Profile from './contents/Profile'
 import AdminDashboard from './contents/AdminDashboard'
 
 function App() {
+
   return (
     <Router>
       <Switch>
@@ -31,10 +33,25 @@ function App() {
           <Signup />
         </Route>
         <Route path="/profile">
-          <Profile />
+          {localStorage.token ? (
+            <Profile />
+          ) :
+            <Redirect to="/home" />
+          }
         </Route>
         <Route path="/dashboard">
-          <AdminDashboard />
+          {localStorage.token ? (() => {
+            if (localStorage.level === "admin")
+              return (
+                <AdminDashboard />
+              )
+            else
+              return (
+                <Redirect to="/home" />
+              )
+          }) :
+            <Redirect to="/home" />
+          }
         </Route>
       </Switch>
     </Router>
