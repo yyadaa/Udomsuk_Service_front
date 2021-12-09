@@ -10,6 +10,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+    font-family: 'Bai Jamjuree';
+    src: url('../fonts/BaiJamjuree-Medium.ttf') format("truetype");
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

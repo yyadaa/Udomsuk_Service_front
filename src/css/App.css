@@ -10,3 +10,37 @@
 .logo {
   font-family: 'Lobster', cursive;
 }
+
+body {
+  @apply
+  overflow-x-hidden;
+}
+
+.mapElement {
+  @apply
+  w-80
+  h-80
+  md:w-map
+  md:h-map
+  flex
+  self-center;
+}
+
+@keyframes navAnimation {
+  from {
+    margin-top: -50%;
+    height: -100%;
+  }
+
+  to {
+    margin-top: 0%;
+    height: 100%;
+  }
+}
+
+.mobile-menu {
+  z-index: -100;
+  animation-duration: 0.5s;
+  animation-name: navAnimation;
+  animation-timing-function: ease-in-out;
+}

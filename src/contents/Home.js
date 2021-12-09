@@ -2,9 +2,9 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Promote from '../components/Carousel'
 import Map from '../components/Map'
-import * as BsIcon from "react-icons/bs";
-
-
+import * as BsIcon from "react-icons/bs"
+import Ensure from '../components/Ensure'
+import Footer from '../components/Footer'
 
 
 function Home() {
@@ -15,31 +15,33 @@ function Home() {
     ]
     return (
         <>
-            <div class="flex h-full flex-col bg-bluebg">
+            <div class="md:flex h-full flex-col bg-cream bg-opacity-50">
                 <Navbar />
-                <div class="flex flex-col sm:flex-row h-full m-5">
-                    <div class="w-3/5 flex flex-col justify-center pl-36 ">
+                <div class="flex w-full flex-warp flex-col md:flex-row justify-center items-center pt-10">
+                    <div class="w-4/5 md:w-3/5 flex flex-col justify-center pl-0 md:pl-36 self-center">
                         <Promote />
-                        <span class="text-white text-4xl my-2">Udomsuk Services</span>
-                        <div className="text-white text-xl">
+                        <span class="text-blue text-4xl my-2">Udomsuk Services</span>
+                        <div className="text-blue text-xl">
                             ทีมช่างอุดมสุข เซอร์วิส พร้อมบริการ ทางร้านรับซ่อมงานประกันมอเตอร์ไซค์และบิ๊กไบท์ <br />
                             เป็นอู่ในเครือ คุ้มภัย อาคเนย์ เอเชีย เมืองไทย นวกิจ ทิพย ไทยประกัน AXA <br /> มิตชุย มิตรแท้
                             และอีกหลายบริษัท <br />เปิดบริการวันจันทร์ - เสาร์ 8:00 - 18:00 สนใจติดต่อสอบถาม
                         </div>
                         {SocialLink.map((data) => {
                             return <a href={data.link}>
-                                <div className="flex flex-row items-center my-1 text-gray text-xl">
+                                <div className="flex md:flex-row items-center my-1 text-blue text-xl">
                                     {data.icon}
                                     <span className="ml-4">{data.name}</span>
                                 </div>
                             </a>
                         })}
                     </div>
-                    <div class="w-2/5 flex justify-center items-center">
+                    <div class="w-full md:flex justify-center items-center self-center flex">
                         <Map isMarkerShown />
                     </div>
                 </div>
+                <Ensure/>
             </div>
+            <Footer/>
         </>
     )
 }

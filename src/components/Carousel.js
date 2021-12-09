@@ -7,26 +7,25 @@ import imageCa2 from '../img/pic_front2.jpg'
 function Promote() {
     return (
         <>
+            <Carousel
+                showThumbs={false} infiniteLoop={true}
+                className="md:w-8/12 w-full "
+                autoPlay={true}
+                interval={4000}
+            >
+                <div>
+                    <img src={imageCa1} alt="" className="rounded-lg" />
 
-                <Carousel
-                    showThumbs={false} infiniteLoop={true}
-                    className="w-8/12"
-                    autoPlay={true}
-                    interval={4000}
-                >
-                    <div>
-                        <img src={imageCa1} alt="" className="rounded-lg"/>
-                        
-                    </div>
-                    <div>
-                        <img src={imageCa2} alt="" className="rounded-lg"/>
-                        
-                    </div>
-                    {/* <div>
+                </div>
+                <div>
+                    <img src={imageCa2} alt="" className="rounded-lg" />
+
+                </div>
+                {/* <div>
                 <img src="assets/3.jpeg" />
                 <p className="legend">Legend 3</p>
             </div> */}
-                </Carousel>
+            </Carousel>
         </>
     );
 }

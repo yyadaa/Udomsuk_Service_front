@@ -1,5 +1,4 @@
 import React from 'react'
-import Map from './Map'
 import * as BsIcon from "react-icons/bs";
 
 function Footer() {
@@ -9,12 +8,12 @@ function Footer() {
         { name: "Tel : 02-0479421 หรือ 081-8166032 และ 087-0667767", icon: <BsIcon.BsTelephone />,  },
     ]
     return (
-        <div className="flex bottom-0 w-screen bg-blue h-full text-white items-center justify-around flex-row">
-            <div className="flex flex-col">
+        <div className="md:flex bottom-0 w-full bg-blue h-100 text-white items-center justify-around flex-row p-4 sm:p-0">
+            <div className="flex item-start flex-col">
                 <div className=" text-3xl my-3">
                     Udomsuk Service
                 </div>
-                <div className="mb-3">
+                <div className="mb-3 text-l">
                     ทีมช่างอุดมสุข เซอร์วิส พร้อมบริการ ทางร้านรับซ่อมงานประกันมอเตอร์ไซค์และบิ๊กไบท์ <br />
                     เป็นอู่ในเครือ คุ้มภัย อาคเนย์ เอเชีย เมืองไทย นวกิจ ทิพย ไทยประกัน AXA <br /> มิตชุย มิตรแท้
                     และอีกหลายบริษัท <br />เปิดบริการวันจันทร์ - เสาร์ 8:00 - 18:00 สนใจติดต่อสอบถาม
@@ -27,9 +26,6 @@ function Footer() {
                         </div>
                     </a>
                 })}
-            </div>
-            <div className="my-3 h-44 w-4/12 rounded-3xl">
-                <Map isMarkerShown />
             </div>
         </div>
     )

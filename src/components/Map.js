@@ -13,7 +13,7 @@ const Map = compose(
             "https://maps.googleapis.com/maps/api/js?key=AIzaSyBK1EngTtxw7KUFFkwLOgglfY0rGyNPj9c&libraries=geometry,drawing,places",
         loadingElement: <div/>,
         containerElement: <div/>,
-        mapElement: <div className="my-3 rounded-3xl" style={{height:"450px", width:"450px"}}/>
+        mapElement: <div className="my-3 rounded-3xl mapElement" />
     }),
     withScriptjs,
     withGoogleMap
