@@ -21,10 +21,6 @@ function Promote() {
                     <img src={imageCa2} alt="" className="rounded-lg" />
 
                 </div>
-                {/* <div>
-                <img src="assets/3.jpeg" />
-                <p className="legend">Legend 3</p>
-            </div> */}
             </Carousel>
         </>
     );

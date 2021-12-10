@@ -1,5 +1,5 @@
 //หน้าสำหรับแอดมินเท่านั้น
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
 import swal from 'sweetalert'

@@ -1,69 +1,49 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-// eslint-disable-next-line
-// import Button from '@mui/material/Button';
 const API_Product = 'https://udomsukservice.herokuapp.com/product'
 
 export default function MotorSecondHand() {
-    // กำหนดตัวแปรมารับค่าที่ดึงจาก api (ตัวหน้าไว้เรียกใช้ , ตัวหลังไว้ set ค่า) , useState = ค่า default
     const [productData, setProductData] = useState([])
 
-    // ใช้เพื่อเมื่อแสดงหน้านั้นก็ให้ทำงานทันที
     useEffect(() => {
-        // ตัวแปร fetch api
         const fetchApiProduct = async () => {
             try {
-                // เรียก api ใช้ axios เก็ํบไว้ตัวแปร res
                 const res = await axios.get(API_Product)
-                // set ตัวแปรของ productData
                 setProductData(res.data)
             }
             catch (err) {
                 console.error(err)
             }
         };
-        // เรียกใช้ตัวแปรด้านบน
         fetchApiProduct()
     }, [])
     const [showModal, setShowModal] = useState(false);
     const [dataForPopup, setDataForPopup] = useState([])
     const keepTemp = []
 
-    // เมื่อกด
     const handleClickPopup = async (name, price, img, des, status) => {
         setShowModal(true)
-        // push ข้อมูลเข้าไปใน array ก่อนที่จะเอาเข้า state
+        
         keepTemp.push(name)
         keepTemp.push(price)
         keepTemp.push(img)
         keepTemp.push(des)
         keepTemp.push(status)
-        // set ค่า state เป็น array ของ keepTemp
+
         setDataForPopup(keepTemp)
     }
 
     //เมื่อปิด
     const handleClosePopup = async () => {
         setShowModal(false)
-        // clear ค่า keepTemp เป็น array ว่าง เพื่อที่จะเอาไปใช้ใหม่
+        
         keepTemp.length = 0
-        // clear ค่า state
+    
         setDataForPopup([])
     }
 
     return (
         <>
-            {/* ถ้าหากมีข้อมูลในตัวแปร producData ให้ map array ออกมา
-                หลักการเดียวกับ if else ( ? = if / : = else )
-                ในที่นี้จะเขียได้ว่า
-                if (productData.length > 0) {
-                    ....
-                } else {
-                    null
-                }
-                เป็นต้น
-             */}
-
             {productData.length > 0 ? productData.map((data) => {
                 return <>
                     <div className={data.status === true ?
@@ -83,7 +63,6 @@ export default function MotorSecondHand() {
                             variant="outlined"
                             className=" text-blue bg-gray active:bg-pink-600 text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
-                            // ส่งค่าแต่ละอันที่ถูก loop array ไปใน parameter
                             onClick={() => handleClickPopup(data.products_name, data.price, data.img, data.description, data.status)}
                         >
                             รายละเอียด
@@ -141,7 +120,6 @@ export default function MotorSecondHand() {
                     </div>
                 </>
             }) :
-                // ถ้าไม่มีเป็น null
                 null
             }
         </>

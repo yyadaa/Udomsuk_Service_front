@@ -1,6 +1,4 @@
-// modules import
 import React from 'react'
-// components import
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import MotorSecondHand from '../components/MotorSecondHand'

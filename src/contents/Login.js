@@ -22,7 +22,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="http://pumpuang.trueddns.com:58273/">
+      <Link color="inherit" href="http://suvarn.3bbddns.com:12900/">
         Udomsuk Services
       </Link>{' '}
       {new Date().getFullYear()}
@@ -76,14 +76,9 @@ export default function Login() {
     }
   }
 
-  function handleEmailChange(event) {
-    setEmail(event.target.value)
-  }
-
-  function handlePasswordChange(event) {
-    setPassword(event.target.value)
-  }
-
+  const handleEmailChange = (event) => setEmail(event.target.value)
+  const handlePasswordChange = (event) => setPassword(event.target.value)
+  
   return (
     <>
       <Navbar />

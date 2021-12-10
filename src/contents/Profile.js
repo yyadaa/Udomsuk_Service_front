@@ -4,7 +4,6 @@ import Footer from '../components/Footer'
 
 
 export default function Profile() {
-    console.log(localStorage)
     return (
         <>
             <Navbar />

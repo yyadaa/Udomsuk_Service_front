@@ -10,6 +10,7 @@ import Image7 from '../img/ensure/thai.png'
 import Image8 from '../img/ensure/axa.png'
 import Image9 from '../img/ensure/misui.jpeg'
 import Image10 from '../img/ensure/mittare.jpeg'
+
 function Ensure() {
     return (
         <Figure>

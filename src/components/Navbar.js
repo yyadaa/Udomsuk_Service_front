@@ -12,9 +12,8 @@ export default function Navbar() {
         { name: 'ลงชื่อเข้าใช้', path: '/login' },
         { name: 'สมัครสมาชิก', path: '/signup', }
     ];
-    // สร้างตัวแปรเก็บค่า true false (boolean) เพื่อดูว่ากดปุ่ม nav หรือยัง
+    
     const [click, setClick] = useState(false);
-    // ข้างล่างจะเป็นฟังก์ชั่นถ้ากดปุ่มจะ set ค่าตัวแปรด้านบนเป็นค่าตรงข้าม
     const handleClick = () => setClick(!click);
 
     return (
@@ -84,7 +83,6 @@ export default function Navbar() {
                     </button>
                 </div>
             </div>
-            {/* ใน className ถ้า click = true จะให้แสดงตัว nav bar ของ mobile แต่ถ้าไม่ใช่ ให้ hidden (หลักการเดียวกับ if else (เครื่องหมาย ? กับ :)) */}
             <div className={click ? "w-full bg-blue h-full text-white mobile-menu md:hidden text-col py-3" : "hidden"}>
                 {nav_item.map((data) => {
                     return <Link to={data.path} >

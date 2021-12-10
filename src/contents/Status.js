@@ -39,7 +39,6 @@ function Status() {
     return (
         <>
             <Navbar />
-            {/* ถ้ามีข้อมูลในตัวแปร report ให้เป็น h-full ถ้าไม่มี h-screen เพื่อ responsive */}
             <div className={
                 report.length > 0 ?
                     "bg-cream bg-opacity-50 flex h-full justify-center items-center w-full py-10 flex-col"
